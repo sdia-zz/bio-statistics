@@ -73,17 +73,39 @@ As a consequence (prove it!),
 * $ \max_{i} P(E_i) \leq \sum_{i=1}^{n} P(E_i) $
 
 
-
-
 ### Random variables
 
+A **random variable** is an outcome of an experiment –– it can be *discrete* or *continuous*.
 
 
 
 ### PMFs and PDFs
 
+A **Probability Mass Function** evaluated at a *value*, corresponds to the *probability* that a *random variable* takes that *value*.
 
 
+To be a valid *pmf* a function, $p$, must satisfy
+
+
+1. $$ p(x) \geq 0, \ \ \forall \ \ x $$
+
+2. $$ \sum_{x} p(x) = 1 $$ sum is taken over **all possible values** of $x$
+
+
+The canonical example is the Bernouili trial; let $X$ be the result of a coin flip where $X=0$ represents *Tail* and $X=1$ represents *Head*. Let $\theta$ be the probability of a head, then a valid *pmf* is
+
+$$ p: x \mapsto \theta ^ {x} \ (1 - \theta ^ {1-x}) $$
+
+
+We then have, probability of head is $p(1) = \theta$, and probability of tail is $p(0) = 1 - \theta$.
+
+
+A **Probability Density Function** is a function associated with a *continous random variable*. Probability for the *random variable* corresponds to area under *pdf* curve. To be a valid *pdf* a function, f, must satisfy:
+
+
+1. $$ f(x) \geq 0, \ \forall \ x $$
+
+2. $$ \int_{-\infty}^{\infty} f(x)dx = 1 $$
 
 
 ### CDFs, survival functions and quantiles
