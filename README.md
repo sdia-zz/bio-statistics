@@ -283,4 +283,128 @@ E.g. the probability that values lie outside the interval $\big( \mu - \sqrt{2} 
 
 Because it can be applied to completely arbitrary distributions provided they have a known finite mean and variance, the inequality generally gives a poor bound compared to what might be deduced if more aspects are known about the distribution involved.
 
-For $k=3$, the Chebyshev says the probabilty to lie within $3$ standard deviations is $88\%$, whereas we know for a normal distribution it is $99.73\%$ –– using the 68/95/99.7 rule.
+For $k=3$, *Chebyshev* says the probability for a value to lie within $3$ standard deviations is $88.89\%$, whereas we know that probability for a normal distribution is $99.73\%$ –– using the [$68/95/99.7$ rule](https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule).
+
+
+## Random vectors
+
+**Random vectors** are simply *random variables* collected into a vector. E.g. if $X$ and $Y$ are random variable then the vector $[X, Y]$ is a *random vector*.
+
+
+For **continuous random vector** the joint density satisfies,
+
+$$ f(x, y) \geq 0 \ \textrm{and} \iint f(x,y)dxdy = 1 $$
+
+
+For **discrete random variable**,
+
+$$ \sum \sum f(x,y) = 1 $$
+
+
+## Independence
+
+Two events $A$ and $B$ are **independent** if,
+
+$$ P(A \cap B) = P(A)P(B)$$
+
+
+Two random variables, $X$ and $Y$ are independent if for any two sets $A$ and $B$,
+
+$$ P([X \in A]\cap [Y \in B]) = P(X \in A)P(Y \in B) $$
+
+For a random vector, independence assumption is,
+
+$$f(x,y)=f(x)f(y)$$
+
+
+If $A$ and $B$ are independent then any of their subsets are also independent.
+
+
+If a collection of random variables $\{X_i\}_{i=1\dots n}$ are independent, then their joint distribution is the product of their individual densities or mass functions or mass functions, $f_i$,
+
+$$ f(x_1,\dots, x_n) = \prod_{i=1}^{n}f_i(x_i)$$
+
+
+Moreover,
+* if $f_1=\dots=f_n$, we say that $\{X_i\}_{i=1\dots n}$ are $iid$ ––**independent and identically distributed**,
+* $iid$ random variables are the default model for random sample,
+
+
+To Be Continued...: https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture4.pdf
+## Correlation
+
+
+
+## Variance and correlation properties
+
+
+
+## Variances properties of sample means
+
+
+## The sample variance
+
+
+
+
+
+
+// https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture7.pdf
+
+## Some common distributions
+
+### Bernouilli distribution
+
+The **Bernouilli distribution** arises as the result of a binary outcome. *Bernouilli* random variables take only the values $1$ and $0$ with a probability of $\theta$ and $1-\theta$ respectively.
+
+The *PMF* for a *Bernouilli* random variable $X$ is
+
+$$ P(X = x) = \theta^x (1 - \theta)^{1-x}$$
+
+
+The *mean* of a *Bernouilli* random variable is $\theta$ and the *variance* is $\theta(1 - \theta)$
+
+#### $iid$ Bernouilli trials
+
+
+If several $iid$ *Bernouilli* observations, say $\{x_i\}_{i=1\dots n}$, are observed, the likelihood is:
+
+
+$$ \prod_{i=1}^{n} \theta^{x_i}(1-\theta)^{1-x_i} = \theta^{\sum x_i} (1 - \theta)^{n -\sum{x_i}}$$
+
+Notice from previous equation, that the likelihood depends only on $\sum x_i$. Because $n$ is fixed and assumed known, this implies that the sample proportion $\sum_i x_i /n$ contains all the relevant information about $\theta$.
+
+If we maximize the Bernouilli likelihood over $\theta$, we obtain that $ \hat{\theta} = \sum_i x_i / n$ is the **maximum likelihood** estimator for $\theta$.
+
+
+#### Binomial trials
+
+The **Binomial random variables** are obtained as the sum of $iid$ *Bernouilli* trials. The *binomial* mass function is
+
+$$ P(X=x) = \binom {n}{x} \ \theta^x (1 - \theta)^{n-x} $$, for $x=0\dots n$
+
+
+#### Note for myself
+
+**$iid$ Bernouilli** is different from **Binomial** counterpart, because the latter has the notion of *sum*, while the former deals with **one** observation...
+
+
+
+
+
+
+### The Normal distribution
+
+A random variable is said to follow a **Normal** or **Gaussian** distribution with mean $\mu$ and variance $\sigma^2$ if the associated density is,
+
+$$ f(x) = \frac {1} {\sqrt{2 \pi }\sigma } e^{-\frac {(x - \mu) ^ 2} {2 \sigma ^ 2}} $$
+
+
+If $X$ is a random variable with this density, we write $X \sim \mathcal{N} (\mu, \sigma)$, then $E[X]=\mu$ and $Var(X)=\sigma^2$.
+
+
+When $\mu=0$ and $\sigma=1$ the resulting distribution is called the **Standard Normal distribution**, it is labelled $\phi$; standard normal variables are often labelled $Z$.
+
+
+
+To be continued: // https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture7.pdf
