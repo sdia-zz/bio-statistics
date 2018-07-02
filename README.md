@@ -664,8 +664,80 @@ $$ \big [  \frac {n-1} {n} \sum_{i=1}^{n} (\hat{\theta}_i - \overline{\theta})^2
 
 ## Intervals for Binomial proportions
 
+**{Important}**
 
-## Agresti-Coull interval
+* When $X \sim Binomial(n, p)$ we know that,
+  a. $\hat{p} = X/n$ is the MLE for p,
+  b. $E[\hat{p}] = p$
+  c. $Var(\hat{p}) = p(1-p)/n$
+  d. $\frac {\hat{p} - p} {\sqrt{\hat{p}(1-\hat{p})/n}}$
+
+
+* the latter fact leads to the Wald interval for $p$
+
+$$ \hat{p} = Z_{1-\alpha / 2}  \sqrt{\hat{p}(1-\hat{p}) / n} $$
+
+
+@TODO read again about Wald interval and how it is fixed with Agresti-Coull intervals.
+
 
 
 ## Bayesian analysis
+
+some more vocabulary
+
+* Bayesian statistics posits a **prior** on the parameter of interest,
+* all inferences are then performed on the distribution of the parameter given the data, called the **posterior**
+* In general,
+
+
+$$ {Posterior} \propto {Likelihood} \times {Prior} $$
+
+
+* the likelihood is the factor by which our prior beliefs are updated to produce conclusions in the light of the data.
+
+
+## Beta priors
+
+* It is the default **prior** for parameters between $0$ and $1$.
+* the Beta density depends on 2 parameters $\alpha$ and $\beta$,
+
+
+$$  Beta(\alpha, \beta) = \frac {\Gamma(\alpha + \beta)} {\Gamma(\alpha) \Gamma(\beta)} p^{\alpha -1}(1-p)^{\beta - 1} \ , \ \ 0 \leq p \leq 1 $$
+
+
+
+
+* the mean of the Beta density is
+
+
+$$\alpha / (\alpha + \beta)$$
+
+
+* the variance of the Beta density is
+
+
+$$ \frac { \alpha \beta } {(\alpha + \beta)^2 (\alpha + \beta + 1)} $$
+
+
+
+* the uniform density is the special case where $\alpha=\beta=1$
+
+
+## Beta posterior
+
+The resulting **posterior** is also a Beta function,
+
+$$Posterior \propto p^{x+\alpha-1}(1-p)^{n-x+\beta-1}$$
+
+
+## Bayesian credible intervals
+
+* a Bayesian credible interval is the Bayesian analog of a confidence interval,
+* a $95\%$ credible interval, $[a,b]$ would satisfy
+
+
+$$ P(p \in [a,b] \ | x) = 0.95 $$
+
+
+* the best credible intervals chop off the posterior with a horizontal @TODO: why?
