@@ -177,7 +177,7 @@ The *expected value* is a linear operator
 Let us consider a **collection** of *random variable* $\{ X_i \}, \ i = 1\dots n$, with each having the same expected value $\mu$. Therefore the expected value of the sample average of the $\{ X_i \}$ is also $\mu$:
 
 
-$$ E \big[ \frac {1} {n} \sum_{i=1}^{n} X_i  \big] = \frac {1} {n} \sum_{i=1}^{n} E[X_i] = \mu $$
+$$ E \Big[ \ \frac {1} {n} \sum_{i=1}^{n} X_i  \ \Big] = \frac {1} {n} \sum_{i=1}^{n} E[X_i] = \mu $$
 
 
 Therefore the *expected value* of the **sample mean** is the population *mean* that it's trying to estimate. We then say: *the expected value is an **unbiased** estimator*.
@@ -330,28 +330,190 @@ Moreover,
 * $iid$ random variables are the default model for random sample,
 
 
-To Be Continued...: https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture4.pdf
+
+## Covariance
+
+The **covariance** between two random variables  $X$ and $Y$ is defined as,
+
+$$ Cov(X,Y) = E[(X-\mu_x)(Y-\mu_y)]$$
+
+
+also equivalent to,
+
+$$ Cov(X,Y)=E[XY] - E[X]E[Y] $$
+
+
+
+
+
+Useful facts about covariance,
+
+* $Cov(X,Y)=Cov(Y,X)$
+
+* $|Cov(X,Y)| \leq \sqrt{Var(X)Var(Y)}$
+
+
+
 ## Correlation
 
+The Correlation between $X$ and $Y$ is,
+
+$$ Cor(X,Y) = \frac{Cov(X,Y)}  {\Big [ \ Var(X)Var(Y) \ \Big]^2}$$
+
+
+Useful facts,
+
+
+* $|Cor| \leq 1$
+
+* $Cor(X,Y) = \pm 1  \iff \exists \ (a,b) \in \mathbb{R^2} \ \big | \ Y = aX + b$
+
+* $Cor(X,Y) = 0 \implies X,Y$ are uncorrelated
+
+* $Cor \rightarrow 1 \ (resp. -1)$: postive (*resp.* negative) correlation
 
 
 ## Variance and correlation properties
 
 
+* when $\big \{ X_i \big \}$ are uncorrelated $Var(\sum_{i=1}^{n}a_i X_i +b) = \sum_{i=1}^{n}a_i^2Var(X_i)$
+
+* ... otherwise add the term $2\sum_{i=1}^{n-1} \sum_{j=i}^{n}a_i a_j Cov(X_i, X_j)$
+2
+
+* **[Important]** if the ${X_i}$ are iid with variance $\sigma^2$ then $Var(\overline{X})=\sigma^2/n$ and $E[S^2]=\sigma^2$
+
+
+
 
 ## Variances properties of sample means
+
+Suppose $X_i$ are iid with variance $\sigma ^ 2$, then,
+
+
+
+$$Var(\overline{X}) = \frac {1}{n^2} \sum_{i=1}^{n} Var(X_i) = \frac {\sigma ^ 2} {n} $$
+
+
+
+
+* when $X_i$ are independent with a common variance $Var(\overline{X}) = \sigma ^ 2 / n$
+* $\sigma / \sqrt n$ is called **the standard error** of the sample mean,
+* the standard error of the sample mean is the standard deviation of the distribution of the sample mean,
+* $\sigma$ is the standard deviation of the distribution of a single observation,
+* the sample mean has to be less variable than a single observation, therefore its standard deviation is divided by a $\sqrt n$
+
 
 
 ## The sample variance
 
+The **Sample Variance** is defined as
+
+
+$$ S^2 = \frac {\sum_{i=1}^{n} (X_i - \overline{X})^2} {n-1} $$
+
+
+* the sample variance is an estimator of $\sigma^2$
+* a computational form for the numerator is $\sum_{i=1}^{n}(X_i-\overline{X})^2 = \sum_{i=1}^{n} X_i ^ 2 - n\overline{X}^2$
+* the sample variance is (nearly) the mean of the squared deviations from the mean,
 
 
 
+## Sample Variance VS Sample Means ... still confused
+
+Assume $X_i$ are iid with mean $\mu$ and variance $\sigma ^ 2$, then
+
+* $S^2$ estimates $\sigma ^ 2$  –– i.e. the sample variance estimates the standard deviation of the distribution of a single observation,
+
+* the calculation of $S^2$ involves dividing by $n-1$
+
+What is above is very confusing ...
+
+* $S/\sqrt n$ estimates $\sigma / \sqrt n$ the standard error of the mean,
+
+* $S/\sqrt n$ is called the sample standard error (of the mean),
 
 
-// https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture7.pdf
+
+## Conditional Probabilities
+[sce](https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture5.pdf)
+
+The formula to remember is,
+
+$$ P(A \cap B) = P(A) P(B|A) $$
+
+
+Therefore,
+
+$$ P(B|A) = \frac {P(A \cap B)} {P(A)} $$
+
+
+And if $A$ and $B$ are independent then,
+
+$$ P(B|A) = P(B) $$
+
+
+## Conditional densities
+
+(a) Let $f(x,y)$ the bi-variate density of two RVs $X$ and $Y$,
+(b) let $f(x)$ and $f(y)$ be the associated marginal mass function:
+
+$$f(y) = \int{f(x,y)dx}$$
+
+or
+
+
+$$f(y) = \sum_{x}f(x,y)$$
+
+Then the **conditional density** function at the point $Y=y$ is given by,
+
+$$f(x|Y=y) = \frac {f(x,y)} {f(y)} $$
+
+
+## Baye's rule
+
+(a) let $f(x|Y=y)$ be the conditional density (*resp.* mass) function for $X$ given $Y=y$,
+(b) let $f(x)$ be the marginal distribution for $x$
+
+Then in the continous case,
+
+$$ f(x|Y=y) = \frac {f(y|x)f(x)} {\int_t{f(y|t)f(t)dt}} $$
+
+
+and in the discrete case,
+
+$$ f(x|Y=y) = \frac {f(y|x)f(x)} {\sum_{t}{f(y|t)f(t)}} $$
+
+
+Using the discrete version of the formula, it comes the,
+
+$$ P(B|A)=\frac {P(A|B)P(B)} {P(A|B) P(B) + P(A|\overline{B})P(\overline{B})} $$
+
+@TODO: the diagnostic tests from Lecture #5
+
+
+## Likelihood
+[sce](https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture6.pdf)
+
+
+We assume data comes from a family of distributions indexed by a parameter that represents a useful summary of the distribution. Therefore,
+
+
+> The **Likelihood** of a collection of data is the joint density evaluated as a function of the parameters with the data fixed.
+
+
+Another way to say it,
+
+> Given a stistical probability mass function or density: $f(x, \theta)$, where $\theta$ is a nunknown parameter, the **likelihood** is $f$ viewed as a function of $\theta$ for a fixed, observed value of $x$.
+
+
+@TODO: confirm the following: frequentists assume the likelihood to contain to contain all relevant information regarding the model that generated the data.
+
+
 
 ## Some common distributions
+[sce](https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture7.pdf)
+
 
 ### Bernouilli distribution
 
@@ -406,5 +568,104 @@ If $X$ is a random variable with this density, we write $X \sim \mathcal{N} (\mu
 When $\mu=0$ and $\sigma=1$ the resulting distribution is called the **Standard Normal distribution**, it is labelled $\phi$; standard normal variables are often labelled $Z$.
 
 
+Useful facts,
+
+* if $X \sim \mathcal{N} (\mu, \sigma ^2)$, then $Z=\frac {X-\mu}{\sigma}$ is standard normal,
+* if $Z$ is standard normal then $X=\mu + \sigma Z \sim \mathcal{N}(\mu, \sigma^2)$
+* **NO COMPRENDO** the non-standard normal density is $\phi \big \{   (x-\mu) / \sigma   \big \}   / \sigma$
+
 
 To be continued: // https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture7.pdf
+
+
+
+## The Law of Large Numbers
+
+> If $\big \{ X_i \big\}$ are iid from a population with mean $\mu$ and variance $\sigma ^ 2$ then $\overline{X}_n$ converges to $\mu$.
+
+
+
+
+## The Central Limit Theorem
+
+> The distribution of averages of iid variables, properly normalized, becomes that of a standard normal as the sample size increases.
+
+
+## Confidence intervals
+
+According to the CLT, the probability that the random interval
+
+
+$$\overline{X}_n \pm z_{1-\alpha / 2} \ \sigma / \sqrt n $$
+
+
+contains $\mu$ is approximately $95\%$, where $z_{1-\alpha / 2}$ is the $1-\alpha / 2$ quantile of the standard normal distribution.
+
+
+## Sample proportions
+
+In case of Bernouilli RVs with probability $p$,  $\sigma ^ 2 = p(1-p)$. The confidence interval is,
+
+$$ \hat{p} \pm z_{1-\alpha / 2} \sqrt{\frac {p(1-p)} {n}}$$
+
+
+
+@TODO: Lecture 9  - Confidence Interval
+@TODO: Lecture 10 - T-Confidence Interval
+
+@TODO: Lecture 11 - Plotting
+
+
+
+## The Jackknife
+
+The **Jackknife** is a small tool for estimating standard errors and the bias of estimators. It involves *resampling* data.
+
+
+How it works?
+
+* The jackknife deletes each observation and calculates an estimate based on the remaining $n-1$ of them,
+* this collection of estimates is used to estimate things like **bias** and **standard error**,
+* Note that bias and standard error are not needed for sample means (because it is unbiased estimates of pupulation means and their standard errors are known),
+
+
+an example?
+
+* let's consider univariate data,
+* let $X_i$ be a collection of data used to estimate a parameter $\theta$,
+* let $\hat{\theta}$ be the estimate based on the full data set,
+* let $\hat{\theta}_i$ be the estimate of $\theta$ obtained by deleting observation $i$,
+* let $\overline{\theta} = \frac{1}{n} \sum_{i=1}^{n} \hat{\theta}_i$
+* then, the jackknife estimate of the bias is
+
+$$ (n-1) \big ( \ \overline{\theta} - \hat{\theta} \ \big ) $$
+
+
+
+* The jackknife estimate of the standard error is
+
+$$ \big [  \frac {n-1} {n} \sum_{i=1}^{n} (\hat{\theta}_i - \overline{\theta})^2 \big ] ^ {1/2} $$
+
+
+## The bootstrap
+
+* the bootstrap principle suggests using the distribution defined by the data to approximate its sampling distribution.
+
+* In practice bootstrap is always carried using simulation,
+
+* the general procedure follows by first simulating complete data sets from the observed data with replacement,
+
+* calculate the statistic for each simulated data set,
+
+* use the simulated statistics to either define a confidence interval or take the standard deviation to calculate a standard error.
+
+
+
+
+## Intervals for Binomial proportions
+
+
+## Agresti-Coull interval
+
+
+## Bayesian analysis
