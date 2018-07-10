@@ -507,7 +507,8 @@ Another way to say it,
 > Given a stistical probability mass function or density: $f(x, \theta)$, where $\theta$ is a nunknown parameter, the **likelihood** is $f$ viewed as a function of $\theta$ for a fixed, observed value of $x$.
 
 
-@TODO: confirm the following: frequentists assume the likelihood to contain to contain all relevant information regarding the model that generated the data.
+@TODO: confirm the following: frequentists assume the likelihood to contain to contain all relevant information regarding the model that generated the data:
+The Likelihood Principle
 
 
 
@@ -741,3 +742,150 @@ $$ P(p \in [a,b] \ | x) = 0.95 $$
 
 
 * the best credible intervals chop off the posterior with a horizontal @TODO: why?
+
+
+
+
+
+
+
+## Hypothesis testing
+
+Condider court of law
+
+* the **null hypothesis** is the defendant is innocent,
+* evidence is required to reject the **null hypothesis**,
+* **type I error** = percentage of innocent people convicted
+* **type II error** = percentage of guilty people let free
+* too little evidence required increases **type I error**,
+* too much evidence required increases **type II error**
+
+
+
+Example,
+
+
+* A respiratory disturbance index of more than 30 events / hour is considered evidence of severe sleep disordered breathing.
+
+* In a sample of 100 overweight subjects with other risk factors the mean RDI was 32 events / hour with a standard deviation of 10 events / hour.
+
+* Our hypothesis ($\mu$ is the population mean RDI)
+  * $H_0: \ \mu=30$
+  * $H_a: \ \mu > 30$
+
+
+Solution,
+
+* a reasonable strategy is would be reject the null hypotheisis if $\overline{X}$ was larger than some constant $C$
+
+* $C$ is chosen such that the probability of a **Type I error**, $\alpha$ is $0.05$,
+
+$0.05 = P \big (\overline{X} \geq C | \mu = 30  \big)$
+$     = P\Big ( \frac {\overline{X} - 30} {10/\sqrt{100}} \geq \frac {C-30} {10/\sqrt{100}} | \mu =30 \Big )$
+$     = P\big ( Z \geq \frac {C-30} {1} \big ) $
+$     = 0.05 = P(Z \geq 1.645)$
+
+Hence $C=31.645$, we reject the null hypothesis $H_0$
+
+
+
+Note it is enough to remark that
+
+
+$$\frac {32-30} {10/\sqrt{100}}=2 \geq 1.645$$
+
+
+
+Ce qu'il faut retenir,
+
+
+* the $Z$ test for $H_0: \mu=\mu_0$
+  * $H_1: \mu < \mu_0$
+  * $H_2: \mu \neq \mu_0$
+  * $H_3: \mu > \mu_0$
+
+* the test statistic: $TS = \frac {\overline{X} - \mu_0} {S/\sqrt{n}}$
+
+* reject the null hypothesis when,
+  * $H_1: TS \leq -Z_{1-\alpha}$
+  * $H_2: |TS| \geq Z_{1-\alpha / 2}$
+  * $H_3: TS \geq Z_{1-\alpha}$
+
+
+
+
+**[IMPORTANT]**
+
+* the Z-test requires the assumption of the CLT and for n large enough for it to apply,
+
+* if n is small, then Gossett's T test is performed exactly the same way, with the normal quantiles replaced by the appropriate Student's T quantiles and n-1 dof
+
+
+**[IMPORTANT]**
+* **Power** is the probability of rejecting the null hypothesis when it is false
+* **Power** is used a lot to calculate sample size for experiments
+
+
+
+Example reconsidered
+
+Let's suppose n=16 (rather than 100), then,
+
+$$ 0.05 = P \big (  \frac {\overline{X} - 30} {s/\sqrt{16}} \geq t_{1-\alpha, 15} | \mu =30 \big ) $$
+
+$\sqrt {16} (32-30)/10 = 0.8$ and $t_{1-\alpha, 15}=1.75$, we fail to reject the null hypothesis.
+
+
+
+## Hypothesis Testing: CI and P-values
+
+**Confidence Intervals**
+The set of all possible values for which you fail to reject the $H_0$ is a $(1-\alpha)\times 100\%$ **Confidence Interval** for $\mu$,
+
+
+
+Similarly, if a $(1-\alpha) \times 100\%$ interval contains $\mu_0$ then we **fail to** reject $H_0$,
+
+
+
+**P-values**
+
+The **P-value** is the probability under the null hypothesis of obtaining evidence as extreme or more extreme than would be observed by chance alone.
+
+
+
+
+Notes,
+
+
+* report the P-value, you can perform the hypothesis test at whatever $\alpha$ level you want,
+
+* if the P-value is less than $\alpha$ you reject the null hypothesis,
+
+* for two sided hypothesis test, double the smaller of the two onde-sided hypothesis P-value,
+
+* **Bottom line is** do not just report P-values, give CIs too!
+
+
+
+
+
+## Power
+[sce](https://github.com/bcaffo/MathematicsBiostatisticsBootCamp2/blob/master/lecture2.pdf)
+
+$$Power = 1-\beta$$
+
+* **Power** is the porbability to reject the null hypothesis when it is false,
+* **Power** is good, you want more of it,
+* A type-II error is failing to reject the null hypothesis when it is actually false: it is noted $\beta$
+
+
+## T-test
+
+
+
+## Monte Carlo
+
+
+
+## Two sample Tests
