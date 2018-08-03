@@ -403,7 +403,11 @@ $$Var(\overline{X}) = \frac {1}{n^2} \sum_{i=1}^{n} Var(X_i) = \frac {\sigma ^ 2
 * $\sigma$ is the standard deviation of the distribution of a single observation,
 * the sample mean has to be less variable than a single observation, therefore its standard deviation is divided by a $\sqrt n$
 
+The variance of the sample means is also called Sampling Variance.
 
+Sampling variance refers to variation of a particular statistic (e.g. mean) calculated in sample if you repeat the study many times.
+
+**Sampling variance** is NOT  **Sample Variance**
 
 ## The sample variance
 
@@ -412,26 +416,7 @@ The **Sample Variance** is defined as
 
 $$ S^2 = \frac {\sum_{i=1}^{n} (X_i - \overline{X})^2} {n-1} $$
 
-
-* the sample variance is an estimator of $\sigma^2$
-* a computational form for the numerator is $\sum_{i=1}^{n}(X_i-\overline{X})^2 = \sum_{i=1}^{n} X_i ^ 2 - n\overline{X}^2$
-* the sample variance is (nearly) the mean of the squared deviations from the mean,
-
-
-
-## Sample Variance VS Sample Means ... still confused
-
-Assume $X_i$ are iid with mean $\mu$ and variance $\sigma ^ 2$, then
-
-* $S^2$ estimates $\sigma ^ 2$  –– i.e. the sample variance estimates the standard deviation of the distribution of a single observation,
-
-* the calculation of $S^2$ involves dividing by $n-1$
-
-What is above is very confusing ...
-
-* $S/\sqrt n$ estimates $\sigma / \sqrt n$ the standard error of the mean,
-
-* $S/\sqrt n$ is called the sample standard error (of the mean),
+This is a definition, just accept it! The sample variance is the variation in a single sample. If the population variance is not available this is what you use to estimate the standard deviation of the distribution of a single observation.
 
 
 
@@ -504,7 +489,7 @@ We assume data comes from a family of distributions indexed by a parameter that 
 
 Another way to say it,
 
-> Given a stistical probability mass function or density: $f(x, \theta)$, where $\theta$ is a nunknown parameter, the **likelihood** is $f$ viewed as a function of $\theta$ for a fixed, observed value of $x$.
+> Given a stistical probability mass function or density: $f(x, \theta)$, where $\theta$ is an unknown parameter, the **likelihood** is $f$ viewed as a function of $\theta$ for a fixed, observed value of $x$.
 
 
 @TODO: confirm the following: frequentists assume the likelihood to contain to contain all relevant information regarding the model that generated the data:
@@ -576,7 +561,38 @@ Useful facts,
 * **NO COMPRENDO** the non-standard normal density is $\phi \big \{   (x-\mu) / \sigma   \big \}   / \sigma$
 
 
-To be continued: // https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture7.pdf
+
+### The Poisson distribution
+
+// from Cameron's Bayesian for hackers
+
+
+$Z$ is Poisson distributed if,
+
+
+$$ P(Z=k) = \frac {\lambda^{k} e^{-\lambda}} {k!} $$
+
+also noted as,
+
+
+
+$$ Z \sim Poi(\lambda) $$
+
+
+
+where,
+
+* $k$ is a positve integer.
+
+* $\lambda$ is called the parameter of the distribution, it controls the distribution's shape. $\lambda$ can be any positive number. By increasing $\lambda$ we add more probability to larger values; by decreasing it we add more probability to smaller values. $lambda$ is the intensity of the Poisson distribution.
+
+
+
+A useful property of the Poisson distribution is that its expected value is equal to its parameter,
+
+$$ E[Z | \lambda] = \lambda $$
+
+
 
 
 
@@ -592,7 +608,7 @@ To be continued: // https://github.com/bcaffo/Caffo-Coursera/blob/master/lecture
 > The distribution of averages of iid variables, properly normalized, becomes that of a standard normal as the sample size increases.
 
 
-## Confidence intervals
+## Confidence intervals using CLT
 
 According to the CLT, the probability that the random interval
 
@@ -603,6 +619,7 @@ $$\overline{X}_n \pm z_{1-\alpha / 2} \ \sigma / \sqrt n $$
 contains $\mu$ is approximately $95\%$, where $z_{1-\alpha / 2}$ is the $1-\alpha / 2$ quantile of the standard normal distribution.
 
 
+
 ## Sample proportions
 
 In case of Bernouilli RVs with probability $p$,  $\sigma ^ 2 = p(1-p)$. The confidence interval is,
@@ -611,10 +628,138 @@ $$ \hat{p} \pm z_{1-\alpha / 2} \sqrt{\frac {p(1-p)} {n}}$$
 
 
 
-@TODO: Lecture 9  - Confidence Interval
-@TODO: Lecture 10 - T-Confidence Interval
+## Confidence Interval take-2
 
-@TODO: Lecture 11 - Plotting
+
+We already see how to build CI using CLT, now let's see how it works for small sample size.
+
+
+Gosset's **t-distribution** allows for better confidence intervals for small samples. In order to introduce **t-distribution** we must discuss the **Chi-Squared** distribution.
+
+
+
+The general procedure for creating CIs:
+
+
+* create a pivot statistic that does not depend on the parameter of interest,
+
+* **NO COMPRENDO** solve the probability that the pivot lies between bounds for the parameter.
+
+
+### The Chi-Squared distribution
+
+Let $S^2$ be the sample variance from a collection of $iid$,  $\mathcal{N} (\mu, \sigma)$ data, then
+
+$$\frac {(n-1) \ S^2} {\sigma ^ 2} \sim \chi^2_{n-1} $$
+
+reads: follows a Chi-squared distribution with $n-1$ dof
+
+
+
+Note:
+
+* the **Chi-squared** distribution is skewed and has support on $0$ to $\infty$
+* its mean is the dof : $n-1$
+* its variance is twice the dof : $2 \times (n-1)$
+
+
+Important note:
+
+Let $\chi^{2}_{n-1, \alpha}$ be the $\alpha$ quantile of the Chi-squared distribution then,
+
+
+$$1-\alpha = P\Big( \chi^{2}_{n-1, \ \alpha/2} \leq \frac {(n-1) \ S^2}{\sigma ^2} \leq \chi^{2}_{n-1, 1-\alpha/2}     \Big)$$
+
+
+$$\ \ \ \  = P \Big( \frac{(n-1) \ S^2}{\chi^{2}_{n-1, \ 1-\alpha / 2}} \leq \sigma^2 \leq  \frac{(n-1) \ S^2}{\chi^{2}_{n-1, \ \alpha / 2}}   \Big)$$
+
+
+so that
+
+$$\Big [ \frac {(n-1) \ S^2} {\chi^2_{n-1, \ 1-\alpha/2}} \ , \  \frac {(n-1) \ S^2} {\chi^2_{n-1, \ \alpha/2}}  \Big]$$
+
+
+
+is a $100 \ (1-\alpha)\ \%$ confidence interval for $\sigma ^ 2$
+
+
+
+* this interval relies heavily on the **assumption of normality**,
+* it turns out,
+
+
+$$(n-1) \ S^2 \sim Gamma\{ (n-1) \ / \ 2, \ 2\sigma ^ 2 \}$$
+
+which reads: follows a gamma distribution with shape $(n-1)/2$ and scale $2\sigma^2$
+
+* the previous result can be used to plot a likelihood function for $\sigma ^2$
+
+
+### Gosset's $t$ distribution
+
+Invented by William Gosset in 1908, it has thicker tails than the normal distribution. It is indexed by a degrees of freedom; gets more like a standard normal as df gets larger. The formula,
+
+
+$$ \frac {Z} {\sqrt{ \chi^2 \ / \ df}} $$
+
+
+where $Z$ and $\chi^2$ are independent standard normals and Chi-squared distributions respectively.
+
+
+
+
+Let $(X_1, \dots, X_n)$ iid and $\mathcal{N}(\mu, \sigma^2)$, then:
+
+1. $\frac{\overline{X}-\mu}{\sigma / \sqrt{n}}$ is standard normal,
+2. $\sqrt{\frac{(n-1) \ S^2}{\sigma ^2 (n-1)}} = S \ / \ \sigma$ is the square-root of a Chi-squared divided by its dof.
+
+
+
+Then,
+
+$$\frac { \frac {\overline{X}-\mu} {\sigma / \sqrt{n}} } {S/\sigma} = \frac {\overline{X}-\mu} {S/\sqrt{n}} $$
+
+
+follows Gosset's $t$ distribution with $n-1$ dof.
+
+
+We can use it to create a confidence interval for $\mu$.
+
+
+Let $t_{df, \alpha}$, bt the $\alpha^{th}$ quantile of the $t$-distribution with given dof,
+
+$$ 1-\alpha = P\Big(  -t_{n-1, 1-\alpha/2} \leq \frac {\overline{X} - \mu} {S/\sqrt{n}}  \leq t_{n-1, 1-\alpha/2}  \Big)$$
+
+$$ \ \ = P \Big(  \overline{X} - t_{n-1, 1-\alpha/2} \ S \ / \ \sqrt{n} \leq \mu \leq \overline{X} + t_{n-1, 1-\alpha/2} \ S \ / \sqrt{n} \Big)$$
+
+
+
+The interval is $\overline{X} \pm t_{n-1, \ 1-\alpha/2} \ S / \sqrt{n}$
+
+
+
+
+Important note:
+
+
+
+* the $t$ interval technically assumes that the data are iid normal,
+* though it is robust to this assumption, it works well whenever the distribution of the data is roughly symmetric and mound shape
+* Paired observations are often analyzed using the $t$ interval by taking differences
+* For large degrees of freedom, t quantiles become the same as standard normal quantiles; therefore this interval converges to the same interval as the CLT yielded
+* For skewed distributions, the spirit of the $t$ interval assumptions are violated
+* Also, for skewed distributions, it doesn't make a lot of sense to center the interval at the mean
+* In this case, consider taking logs or using a different summary like the Median
+* for highly discrete data, like binary, other intervals are available
+
+
+
+@TODO: finish lecture 9: Profile likelihood.
+
+
+## TODO: Lecture 10 - T-Confidence Interval
+
+## TODO: Lecture 11 - Plotting
 
 
 
