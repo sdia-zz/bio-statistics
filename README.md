@@ -1,5 +1,9 @@
 ## Sources
 
+
+[Probability rule](http://ais.informatik.uni-freiburg.de/teaching/ss10/robotics/etc/probability-rules.pdf)
+
+
 Brian Caffo's Mathematical Biostatistics Boot Camp
 
 
