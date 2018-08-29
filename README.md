@@ -1034,3 +1034,64 @@ $$Power = 1-\beta$$
 
 
 ## Two sample Tests
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# More wordings
+
+http://blog.minitab.com/blog/adventures-in-statistics-2/understanding-hypothesis-tests-confidence-intervals-and-confidence-levels
+
+## Significance level
+
+
+The significance level, also denoted as $alpha$, is the probability of rejecting the null hypothesis when it is true. For example, a significance level of 0.05 indicates a 5% risk of concluding that a difference exists when there is no actual difference.
+
+significance level <--> type I error
+
+
+
+
+## P-values
+
+P-values are the probability of obtaining an effect at least as extreme as the one in your sample data, assuming the truth of the null hypothesis.
+
+When a P value is less than or equal to the significance level, you reject the null hypothesis.
+
+
+## Statistical significance
+
+A hypothesis test evaluates two mutually exclusive statements about a population to determine which statement is best supported by the sample data. A test result is statistically significant when the sample statistic is unusual enough relative to the null hypothesis that we can reject the null hypothesis for the entire population. “Unusual enough” in a hypothesis test is defined by:
+
+* The assumption that the null hypothesis is true—the graphs are centered on the null hypothesis value.
+* The significance level—how far out do we draw the line for the critical region?
+* Our sample statistic—does it fall in the critical region?
+
+
+## Confidence intervals
+
+
+## Confidence level
