@@ -1095,7 +1095,45 @@ A hypothesis test evaluates two mutually exclusive statements about a population
 * Our sample statistic—does it fall in the critical region?
 
 
+
+
+
+## Statistical Power
+
+It is the likelihood that a study will detect an effect when there is an effect
+to be detected. If the statistical power is high, the probability of making a Type
+II error goes down. Type II error is to conclude there is no effect when, in fact,
+there is one.
+
+The power is defined as the probability that it will reject a false null
+hypothesis . Power is inversely related to Beta or the probability of making
+type II error.
+
+Power is affected by:
+
+* the magnitude of the effect
+* the size of the sample used to detect the effect
+
+
+or in other words:
+* bigger effects are easier to detect than smaller effects
+* large samples offer greater test sensivity than small sample
+
+
+
 ## Confidence intervals
 
 
 ## Confidence level
+
+
+
+
+
+
+
+
+# Even more wordings
+
+* if the p-value is less than 0.05 we reject the null hypothesis that there is no difference between the means and conclude that a significant difference exists.
+* If the p-value is larger than 0.05, we cannot conclude that a significant difference exists.
